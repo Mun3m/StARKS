@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .marksTable {
+        }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            border: 1px solid #ddd !important;
+            text-align: center;
+        }
+
+        .table > thead:first-child > tr:first-child > th {
+            border-top: 1px solid #ddd !important;
+        }
+
+        .header {
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+        }
+
+        .dialog-model {
+            visibility: hidden;
+            position: absolute;
+            opacity: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            background: black;
+        }
+
+            .dialog-model form {
+                width: 500px;
+                background: white;
+                padding: 10px;
+                border-radius: 5px;
+            }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="header">
+            <div style="width: 50%;  float: left;">
+                <input id="student-filter" onblur="Filter(this, 'Student')" type="text" placeholder="Filter students" />
+                <input id="course-filter" onblur="Filter(this, 'Course')" type="text" placeholder="Filter courses" />
+            </div>
+            <div>
+                <button onclick="ShowDialog('AddStudentContainer');">Add Student</button>
+                <button onclick="ShowDialog('AddCourseContainer');">Add Course</button>
+            </div>
+        </div>
+        <div style="padding-left:10%;padding-right:10%;">
+            <table id="marksTable" class="table marksTable">
+                <thead>
+                    <tr>
+                        <th style="background: black; color: yellow;">INSSIO</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="AddStudentContainer" class="dialog-model">
+            <form id="AddStudentForm">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" data-validation="length" data-validation-length="1-50">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" data-validation="length" data-validation-length="1-50">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" data-validation="length" data-validation-length="1-200">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" data-validation="length" data-validation-length="1-50">
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" class="form-control" id="state" data-validation="length" data-validation-length="1-50">
+                </div>
+                <div class="form-group">
+                    <label for="bday">Date of Birth</label>
+                    <input type="date" class="form-control" id="bday" data-validation="date">
+                </div>
+                <div class="form-group">
+                    <label>Male:</label><input style="position: relative; top: 3px; left: 5px;" type="radio" name="gender" value="0" id="male" checked="checked">
+                </div>
+                <div class="form-group">
+                    <label>Famale:</label> <input style="position: relative; top: 3px; left: 5px;" type="radio" name="gender" value="1" id="female">
+                </div>
+
+                <button onclick="CloseDialog();" class="btn btn-primary">Close</button>
+                <button style="float:right" type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+        <div id="AddCourseContainer" class="dialog-model">
+            <form id="AddCourseForm">
+                <div class="form-group">
+                    <label for="code">Code</label>
+                    <input type="text" id="code" class="form-control" data-validation="number" data-validation-allowing="range[0;2147483646]">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" data-validation="length" data-validation-length="1-50">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description">
+                </div>
+                <button onclick="CloseDialog();" class="btn btn-primary">Close</button>
+                <button style="float:right" type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="Scripts/Index.js"></script>
